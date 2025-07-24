@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>무한 스크롤 그림 갤러리</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: sans-serif;
+      background: #f5f5f5;
+    }
+   .gallery {
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+  padding: 0;
+}
+    
+    .gallery img {
+  width: 100vw;        /* 화면 가로폭 100% */
+  height: auto;
+  display: block;
+  margin: 0;
+  border-radius: 0;
+  box-shadow: none;
+}
+
+  </style>
+</head>
+<body>
+<div class="gallery" id="gallery"></div>
+
+<script>
+  const imageList = [
+    "https://i.ibb.co/MyK2k2p8/4.jpg",
+    "https://i.ibb.co/DDMvyGc0/3.jpg",
+    "https://i.ibb.co/23qx9xLb/2.jpg",
+    "https://i.ibb.co/DDvQG3yc/1.jpg"
+  ];
+
+  const gallery = document.getElementById("gallery");
+  let page = 0;
+
+  function loadImages() {
+    if (page >= imageList.length) return;
+
+    const img = document.createElement("img");
+    img.src = imageList[page];
+    img.alt = `image ${page + 1}`;
+    gallery.appendChild(img);
+    page++;
+  }
+
+  loadImages();
+
+  window.addEventListener("scroll", () => {
+    if (window.innerHeight + window.scrollY >= document.body.offsetHeight - 100) {
+      loadImages();
+    }
+  });
+</script>
+</body>
+</html>
